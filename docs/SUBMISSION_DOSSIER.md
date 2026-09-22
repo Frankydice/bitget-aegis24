@@ -70,7 +70,7 @@ No trade can execute without passing 5 hardcoded quantitative invariants:
 ---
 
 ### Part 5 · Deliverables List
-1. **GitHub Repository:** Codebase containing clean modular architecture, unit tests, and Docker support.
+1. **GitHub Repository:** https://github.com/Frankydice/bitget-aegis24 — Complete modular architecture, unit tests, and Docker deployment.
 2. **Interactive Live Web Demo:** Institutional-grade 24/7 trading desk with real-time multi-agent thought streams and event simulation terminal.
 3. **Verifiable Paper Trading Logs:** `paper_trading_logs.json` and `paper_trading_logs.csv` documenting multi-week simulated execution with cryptographic risk hashes.
 4. **Comprehensive 60-Day Backtest Report:** `backtest_report.json` with rolling 30-day stability metrics.
