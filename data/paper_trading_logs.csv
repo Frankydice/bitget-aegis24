@@ -1,0 +1,4 @@
+formatted_time,symbol,side,confidence,risk_approved,risk_hash,fill_price,size_usdt,pnl_usdt,thesis_excerpt
+2026-09-22 23:46:10 UTC,NVDAUSDT,BUY,0.92,True,4822d31533d604c8,128.52,3000.0,0.0,High conviction breakout
+2026-09-22 23:47:37 UTC,NVDAUSDT,BUY,0.92,True,17cce19b8b41e0c6,128.52,3000.0,0.0,High conviction breakout
+2026-09-22 23:48:30 UTC,NVDAUSDT,BUY,0.92,True,ce38b792569c4fc9,128.52,3000.0,0.0,High conviction breakout

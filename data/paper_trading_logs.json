@@ -1,0 +1,182 @@
+[
+  {
+    "timestamp": 1790120770.6881454,
+    "formatted_time": "2026-09-22 23:46:10 UTC",
+    "proposal_id": "prop_39f2c75d",
+    "symbol": "NVDAUSDT",
+    "side": "BUY",
+    "confidence": 0.92,
+    "risk_approved": true,
+    "risk_hash": "4822d31533d604c8",
+    "order_id": "ord_34374266",
+    "fill_price": 128.52,
+    "size_usdt": 3000.0,
+    "slippage_pct": 0.0545,
+    "pnl_usdt": 0.0,
+    "risk_checks": [
+      {
+        "name": "CircuitBreakerCheck",
+        "status": "PASSED",
+        "threshold": "Drawdown < 2.0%",
+        "observed_value": "Drawdown = 0.0%",
+        "reason": "Daily portfolio drawdown within safe boundaries"
+      },
+      {
+        "name": "LiquiditySpreadCheck",
+        "status": "PASSED",
+        "threshold": "Spread <= 0.35%",
+        "observed_value": "Spread = 0.11%",
+        "reason": "Orderbook liquidity is sufficient for low-slippage execution"
+      },
+      {
+        "name": "FairValueDeviationCheck",
+        "status": "PASSED",
+        "threshold": "Deviation <= 2.50%",
+        "observed_value": "Deviation = 0.04%",
+        "reason": "rToken trading within normal statistical band of fair value NAV"
+      },
+      {
+        "name": "PositionSizingCheck",
+        "status": "PASSED",
+        "threshold": "Size <= 5000.00 USDT (5% AUM)",
+        "observed_value": "3000.00 USDT",
+        "reason": "Requested capital allocation conforms to risk envelope"
+      },
+      {
+        "name": "MarketOpenDeRiskCheck",
+        "status": "PASSED",
+        "threshold": "Outside opening bell freeze window",
+        "observed_value": "Safe 24/7 weekend/overnight trading window",
+        "reason": "Trade window permits active autonomous positioning"
+      },
+      {
+        "name": "AgentConfidenceFloor",
+        "status": "PASSED",
+        "threshold": "Confidence >= 0.65",
+        "observed_value": "Confidence = 0.92",
+        "reason": "Strong consensus conviction across agent swarm"
+      }
+    ],
+    "thesis_excerpt": "High conviction breakout"
+  },
+  {
+    "timestamp": 1790120857.652791,
+    "formatted_time": "2026-09-22 23:47:37 UTC",
+    "proposal_id": "prop_94b3c3b9",
+    "symbol": "NVDAUSDT",
+    "side": "BUY",
+    "confidence": 0.92,
+    "risk_approved": true,
+    "risk_hash": "17cce19b8b41e0c6",
+    "order_id": "ord_f2332a04",
+    "fill_price": 128.52,
+    "size_usdt": 3000.0,
+    "slippage_pct": 0.0545,
+    "pnl_usdt": 0.0,
+    "risk_checks": [
+      {
+        "name": "CircuitBreakerCheck",
+        "status": "PASSED",
+        "threshold": "Drawdown < 2.0%",
+        "observed_value": "Drawdown = 0.0%",
+        "reason": "Daily portfolio drawdown within safe boundaries"
+      },
+      {
+        "name": "LiquiditySpreadCheck",
+        "status": "PASSED",
+        "threshold": "Spread <= 0.35%",
+        "observed_value": "Spread = 0.11%",
+        "reason": "Orderbook liquidity is sufficient for low-slippage execution"
+      },
+      {
+        "name": "FairValueDeviationCheck",
+        "status": "PASSED",
+        "threshold": "Deviation <= 2.50%",
+        "observed_value": "Deviation = 0.04%",
+        "reason": "rToken trading within normal statistical band of fair value NAV"
+      },
+      {
+        "name": "PositionSizingCheck",
+        "status": "PASSED",
+        "threshold": "Size <= 5000.00 USDT (5% AUM)",
+        "observed_value": "3000.00 USDT",
+        "reason": "Requested capital allocation conforms to risk envelope"
+      },
+      {
+        "name": "MarketOpenDeRiskCheck",
+        "status": "PASSED",
+        "threshold": "Outside opening bell freeze window",
+        "observed_value": "Safe 24/7 weekend/overnight trading window",
+        "reason": "Trade window permits active autonomous positioning"
+      },
+      {
+        "name": "AgentConfidenceFloor",
+        "status": "PASSED",
+        "threshold": "Confidence >= 0.65",
+        "observed_value": "Confidence = 0.92",
+        "reason": "Strong consensus conviction across agent swarm"
+      }
+    ],
+    "thesis_excerpt": "High conviction breakout"
+  },
+  {
+    "timestamp": 1790120910.6686826,
+    "formatted_time": "2026-09-22 23:48:30 UTC",
+    "proposal_id": "prop_467b5b31",
+    "symbol": "NVDAUSDT",
+    "side": "BUY",
+    "confidence": 0.92,
+    "risk_approved": true,
+    "risk_hash": "ce38b792569c4fc9",
+    "order_id": "ord_eb5f43a7",
+    "fill_price": 128.52,
+    "size_usdt": 3000.0,
+    "slippage_pct": 0.0545,
+    "pnl_usdt": 0.0,
+    "risk_checks": [
+      {
+        "name": "CircuitBreakerCheck",
+        "status": "PASSED",
+        "threshold": "Drawdown < 2.0%",
+        "observed_value": "Drawdown = 0.0%",
+        "reason": "Daily portfolio drawdown within safe boundaries"
+      },
+      {
+        "name": "LiquiditySpreadCheck",
+        "status": "PASSED",
+        "threshold": "Spread <= 0.35%",
+        "observed_value": "Spread = 0.11%",
+        "reason": "Orderbook liquidity is sufficient for low-slippage execution"
+      },
+      {
+        "name": "FairValueDeviationCheck",
+        "status": "PASSED",
+        "threshold": "Deviation <= 2.50%",
+        "observed_value": "Deviation = 0.04%",
+        "reason": "rToken trading within normal statistical band of fair value NAV"
+      },
+      {
+        "name": "PositionSizingCheck",
+        "status": "PASSED",
+        "threshold": "Size <= 5000.00 USDT (5% AUM)",
+        "observed_value": "3000.00 USDT",
+        "reason": "Requested capital allocation conforms to risk envelope"
+      },
+      {
+        "name": "MarketOpenDeRiskCheck",
+        "status": "PASSED",
+        "threshold": "Outside opening bell freeze window",
+        "observed_value": "Safe 24/7 weekend/overnight trading window",
+        "reason": "Trade window permits active autonomous positioning"
+      },
+      {
+        "name": "AgentConfidenceFloor",
+        "status": "PASSED",
+        "threshold": "Confidence >= 0.65",
+        "observed_value": "Confidence = 0.92",
+        "reason": "Strong consensus conviction across agent swarm"
+      }
+    ],
+    "thesis_excerpt": "High conviction breakout"
+  }
+]

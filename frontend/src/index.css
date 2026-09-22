@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#090a0c] text-slate-100 font-sans;
+  }
+}
+
+/* Custom scrollbars for trading terminal feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0f12;
+}
+::-webkit-scrollbar-thumb {
+  background: #23272f;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #03AAC7;
+}
