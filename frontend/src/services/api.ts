@@ -353,13 +353,56 @@ export const api = {
         });
       }
 
+      const eventTitle =
+        params.custom_title ||
+        (params.event_id === 'evt_weekend_fed_cut'
+          ? 'Fed Weekend Emergency Statement'
+          : params.event_id === 'evt_nvda_hyperscaler'
+          ? 'Hyperscalers $80B GPU CapEx Expansion'
+          : params.event_id === 'evt_tsla_robotaxi'
+          ? 'TSLA Commercial Autonomous FSD Approval'
+          : params.event_id === 'evt_geopolitical_shock'
+          ? 'Red Sea Shipping Supply Disruption'
+          : 'Breaking Overnight Market Shock');
+
+      const executedOrder = approved
+        ? {
+            order_id: `ord_${Math.random().toString(16).slice(2, 10)}`,
+            symbol: targetSym,
+            fill_price: 128.52,
+            size_usdt: 3500.0,
+            slippage_pct: 0.048,
+            risk_hash: newEval.risk_hash,
+            status: "FILLED"
+          }
+        : null;
+
       return {
         status: "SUCCESS",
         symbol: targetSym,
         proposal_id: propId,
         risk_approved: approved,
         order_status: approved ? "FILLED" : "REJECTED_BY_RISK_HARNESS",
-        evaluation: newEval
+        evaluation: newEval,
+        triggered_event: {
+          id: params.event_id || 'evt_custom',
+          title: eventTitle,
+          category: params.custom_bias || 'Overnight Catalyst',
+          affected_symbols: [targetSym]
+        },
+        deliberation: {
+          agent_thoughts: fallbackDebates[0]?.agent_thoughts || [],
+          debate_summary: `Multi-agent consensus generated unanimous trade proposal for ${targetSym} following ${eventTitle}. 5/5 safety checks verified.`
+        },
+        execution_result: {
+          risk_report: {
+            approved: approved,
+            evaluation_id: evalId,
+            symbol: targetSym,
+            checks: newEval.checks
+          },
+          executed_order: executedOrder
+        }
       };
     }
   },

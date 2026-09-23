@@ -7,6 +7,7 @@ import { RiskSeatbelt } from './components/RiskSeatbelt';
 import { EventTerminal } from './components/EventTerminal';
 import { BacktestView } from './components/BacktestView';
 import { PaperLogsTable } from './components/PaperLogsTable';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import {
   api,
   SystemStatus,
@@ -51,10 +52,10 @@ export default function App() {
 
       setStatus(statusData);
       setMarket(marketData);
-      setDebates(debatesData.debates || []);
-      setEvaluations(evalsData.evaluations || []);
-      setPositions(positionsData.positions || []);
-      setPaperLogs(logsData.logs || []);
+      setDebates(debatesData?.debates || []);
+      setEvaluations(evalsData?.evaluations || []);
+      setPositions(positionsData?.positions || []);
+      setPaperLogs(logsData?.logs || []);
       setBacktestReport(backtestData);
     } catch (e) {
       console.error("Data polling error:", e);
@@ -76,40 +77,53 @@ export default function App() {
       />
 
       <main className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full space-y-6">
-        {/* Core Institutional Performance Metrics */}
-        <MetricsGrid report={backtestReport} />
+        <ErrorBoundary fallbackTitle="Metrics Grid Recovered">
+          <MetricsGrid report={backtestReport} />
+        </ErrorBoundary>
 
         {/* Tab 1: 24/7 Agent Desk */}
         {activeTab === 'desk' && (
           <div className="space-y-6">
-            <EventTerminal onEventProcessed={fetchAllData} />
-            <TradingDesk
-              market={market}
-              positions={positions}
-              onSelectSymbol={setSelectedSymbol}
-              selectedSymbol={selectedSymbol}
-            />
+            <ErrorBoundary fallbackTitle="Event Terminal Recovered">
+              <EventTerminal onEventProcessed={fetchAllData} />
+            </ErrorBoundary>
+            <ErrorBoundary fallbackTitle="Trading Desk Recovered">
+              <TradingDesk
+                market={market}
+                positions={positions}
+                onSelectSymbol={setSelectedSymbol}
+                selectedSymbol={selectedSymbol}
+              />
+            </ErrorBoundary>
           </div>
         )}
 
         {/* Tab 2: Agent Debate Swarm */}
         {activeTab === 'debate' && (
-          <AgentDebateStream debates={debates} />
+          <ErrorBoundary fallbackTitle="Agent Debate Swarm Recovered">
+            <AgentDebateStream debates={debates} />
+          </ErrorBoundary>
         )}
 
         {/* Tab 3: Risk Harness ("The Seatbelt") */}
         {activeTab === 'risk' && (
-          <RiskSeatbelt evaluations={evaluations} />
+          <ErrorBoundary fallbackTitle="Safety Harness Recovered">
+            <RiskSeatbelt evaluations={evaluations} />
+          </ErrorBoundary>
         )}
 
         {/* Tab 4: 60d Backtest & Out of Sample */}
         {activeTab === 'backtest' && (
-          <BacktestView report={backtestReport} />
+          <ErrorBoundary fallbackTitle="Backtest View Recovered">
+            <BacktestView report={backtestReport} />
+          </ErrorBoundary>
         )}
 
         {/* Tab 5: Paper Trading Audit Logs */}
         {activeTab === 'paper' && (
-          <PaperLogsTable logs={paperLogs} />
+          <ErrorBoundary fallbackTitle="Paper Logs Recovered">
+            <PaperLogsTable logs={paperLogs} />
+          </ErrorBoundary>
         )}
       </main>
 

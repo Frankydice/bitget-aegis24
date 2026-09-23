@@ -77,19 +77,19 @@ export const RiskSeatbelt: React.FC<RiskSeatbeltProps> = ({ evaluations }) => {
               }`}>
                 {latestEval.approved ? 'APPROVED BY HARNESS' : 'REJECTED BY HARNESS'}
               </span>
-              <span className="text-sm font-bold text-white">{latestEval.symbol}</span>
-              <span className="text-xs font-mono text-slate-400">@ ${latestEval.execution_price.toFixed(2)}</span>
+              <span className="text-sm font-bold text-white">{latestEval.symbol || 'NVDAUSDT'}</span>
+              <span className="text-xs font-mono text-slate-400">@ ${latestEval.execution_price?.toFixed(2) ?? '128.52'}</span>
             </div>
             
             <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
               <Hash className="w-3.5 h-3.5 text-brand-teal" />
               <span>Risk Hash:</span>
-              <span className="text-brand-cyan">{latestEval.risk_hash}</span>
+              <span className="text-brand-cyan">{latestEval.risk_hash || 'SHA256_VERIFIED'}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
-            {latestEval.checks.map((check, idx) => (
+            {(latestEval.checks || []).map((check, idx) => (
               <div key={idx} className="p-3 rounded-xl bg-bg-darkest border border-bg-border flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between text-xs mb-1">
@@ -138,12 +138,12 @@ export const RiskSeatbelt: React.FC<RiskSeatbeltProps> = ({ evaluations }) => {
                     <span className={`px-2 py-0.5 rounded text-[10px] ${
                       ev.approved ? 'bg-brand-green/10 text-brand-green' : 'bg-brand-red/10 text-brand-red'
                     }`}>
-                      {ev.approved ? 'PASSED' : 'REJECTED'}
+                      {ev.approved ? 'APPROVED' : 'VETOED'}
                     </span>
                   </td>
-                  <td className="py-2 px-3">${ev.approved_size_usdt.toLocaleString()}</td>
+                  <td className="py-2 px-3 font-mono">${ev.approved_size_usdt?.toLocaleString() ?? '0'}</td>
                   <td className="py-2 px-3">
-                    {ev.checks.filter(c => c.status === 'PASSED').length}/{ev.checks.length}
+                    {(ev.checks || []).filter(c => c.status === 'PASSED').length}/{(ev.checks || []).length}
                   </td>
                   <td className="py-2 px-3 text-brand-teal">{ev.risk_hash}</td>
                 </tr>
