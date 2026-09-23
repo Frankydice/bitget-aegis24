@@ -69,21 +69,21 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg-darkest text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#08090b] text-slate-100 flex flex-col font-sans selection:bg-brand-cyan/20 selection:text-brand-cyan">
       <Header
         status={status}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
 
-      <main className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full space-y-6">
+      <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl mx-auto w-full space-y-8">
         <ErrorBoundary fallbackTitle="Metrics Grid Recovered">
           <MetricsGrid report={backtestReport} />
         </ErrorBoundary>
 
         {/* Tab 1: 24/7 Agent Desk */}
         {activeTab === 'desk' && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <ErrorBoundary fallbackTitle="Event Terminal Recovered">
               <EventTerminal onEventProcessed={fetchAllData} />
             </ErrorBoundary>

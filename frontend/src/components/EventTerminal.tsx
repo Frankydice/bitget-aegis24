@@ -7,7 +7,7 @@ interface EventTerminalProps {
 }
 
 export const EventTerminal: React.FC<EventTerminalProps> = ({ onEventProcessed }) => {
-  const [loading, setLoading] = useState(false);
+  const [activeLoadingId, setActiveLoadingId] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<any | null>(null);
 
   const presets = [
@@ -16,33 +16,37 @@ export const EventTerminal: React.FC<EventTerminalProps> = ({ onEventProcessed }
       title: 'Fed Weekend Emergency Statement',
       category: 'Macro / Rate Cut',
       symbol: 'SPYUSDT',
-      bias: 'Dovish (+2.8%)'
+      bias: 'Dovish (+2.8%)',
+      isBullish: true
     },
     {
       id: 'evt_nvda_hyperscaler',
       title: 'Hyperscalers $80B GPU CapEx Expansion',
       category: 'Earnings / Tech',
       symbol: 'NVDAUSDT',
-      bias: 'Strong Bullish (+4.5%)'
+      bias: 'Strong Bullish (+4.5%)',
+      isBullish: true
     },
     {
       id: 'evt_tsla_robotaxi',
       title: 'TSLA Commercial Autonomous FSD Approval',
       category: 'Disruptive Tech',
       symbol: 'TSLAUSDT',
-      bias: 'Bullish (+5.2%)'
+      bias: 'Bullish (+5.2%)',
+      isBullish: true
     },
     {
       id: 'evt_geopolitical_shock',
       title: 'Red Sea Shipping Supply Disruption',
       category: 'Geopolitical Shock',
       symbol: 'SPYUSDT',
-      bias: 'Risk-Off (-2.1%)'
+      bias: 'Risk-Off (-2.1%)',
+      isBullish: false
     }
   ];
 
   const handleTriggerPreset = async (presetId: string) => {
-    setLoading(true);
+    setActiveLoadingId(presetId);
     try {
       const res = await api.injectEvent({ event_id: presetId });
       setLastResult(res);
@@ -50,55 +54,95 @@ export const EventTerminal: React.FC<EventTerminalProps> = ({ onEventProcessed }
     } catch (e) {
       console.error(e);
     } finally {
-      setLoading(false);
+      setActiveLoadingId(null);
     }
   };
 
   return (
-    <div className="p-6 rounded-2xl bg-bg-card border border-bg-border">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-bg-border">
-        <div className="flex items-center gap-2">
-          <Zap className="w-5 h-5 text-brand-cyan" />
-          <h2 className="text-base font-bold text-white tracking-tight">Interactive 24/7 Event Simulation Terminal</h2>
+    <div className="p-5 sm:p-6 rounded-2xl bg-[#0e1116] border border-white/[0.08] shadow-md">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5 pb-3.5 border-b border-white/[0.08]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-brand-cyan/15 border border-brand-cyan/30 flex items-center justify-center">
+            <Zap className="w-4 h-4 text-brand-cyan" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-white tracking-tight">Interactive 24/7 Event Simulation Terminal</h2>
+              <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">
+                LIVE SWARM TEST
+              </span>
+            </div>
+            <p className="text-xs font-mono text-slate-400">
+              Simulate overnight / weekend information shocks to test the Agent Swarm & Seatbelt in real time
+            </p>
+          </div>
         </div>
-        <span className="text-xs font-mono text-slate-400">
-          Simulate overnight / weekend information shocks to test the Agent Swarm & Seatbelt
-        </span>
       </div>
 
       {/* Preset Catalyst Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        {presets.map((p) => (
-          <div
-            key={p.id}
-            className="p-4 rounded-xl bg-bg-darkest border border-bg-border hover:border-brand-cyan/40 transition-all flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1">
-                <span>{p.category}</span>
-                <span className="text-brand-teal font-semibold">{p.symbol}</span>
-              </div>
-              <h4 className="text-xs font-bold text-slate-200 mb-2">{p.title}</h4>
-              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-brand-cyan/10 text-brand-cyan mb-3">
-                {p.bias}
-              </span>
-            </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {presets.map((p) => {
+          const isLoadingThis = activeLoadingId === p.id;
+          const isAnyLoading = Boolean(activeLoadingId);
 
-            <button
-              disabled={loading}
-              onClick={() => handleTriggerPreset(p.id)}
-              className="w-full py-2 px-3 rounded-lg bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30 hover:bg-brand-cyan/25 transition-all text-xs font-mono font-medium flex items-center justify-center gap-1.5 disabled:opacity-50"
+          return (
+            <div
+              key={p.id}
+              className="p-4 sm:p-4.5 rounded-xl bg-[#090b0e] border border-white/[0.08] hover:border-brand-cyan/50 hover:bg-[#12151c] shadow-sm hover:shadow-lg hover:shadow-brand-cyan/5 transition-all duration-200 group flex flex-col justify-between hover:-translate-y-0.5"
             >
-              {loading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3.5 h-3.5" />}
-              <span>Inject Catalyst</span>
-            </button>
-          </div>
-        ))}
+              <div>
+                <div className="flex items-center justify-between text-[11px] font-mono mb-2">
+                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">{p.category}</span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/25">
+                    {p.symbol}
+                  </span>
+                </div>
+                <h4 className="text-xs font-bold text-slate-200 group-hover:text-white transition-colors mb-2.5 leading-snug line-clamp-2">
+                  {p.title}
+                </h4>
+                <div className="mb-4">
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] font-mono font-semibold ${
+                      p.isBullish
+                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                        : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                    }`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${p.isBullish ? 'bg-emerald-400' : 'bg-rose-400'}`}></span>
+                    {p.bias}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                disabled={isAnyLoading}
+                onClick={() => handleTriggerPreset(p.id)}
+                className={`w-full py-2.5 px-3 rounded-lg font-mono text-xs font-bold flex items-center justify-center gap-2 transition-all duration-150 active:scale-[0.98] ${
+                  isLoadingThis
+                    ? 'bg-brand-cyan text-black shadow-md shadow-brand-cyan/30'
+                    : 'bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/40 hover:bg-brand-cyan hover:text-black hover:border-brand-cyan shadow-sm hover:shadow-md hover:shadow-brand-cyan/20 disabled:opacity-40 disabled:hover:bg-brand-cyan/15 disabled:hover:text-brand-cyan disabled:cursor-not-allowed'
+                }`}
+              >
+                {isLoadingThis ? (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>Processing Catalyst...</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Inject Catalyst</span>
+                  </>
+                )}
+              </button>
+            </div>
+          );
+        })}
       </div>
 
       {/* Execution Feedback Notification */}
       {lastResult && (
-        <div className="p-4 rounded-xl bg-bg-darkest border border-brand-teal/40">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#090b0e] border border-brand-teal/40 shadow-lg shadow-black/50 animate-fadeIn">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono mb-2 gap-2">
             <span className="text-brand-green font-bold flex items-center gap-1.5">
               <span>● Catalyst Processed Successfully:</span>
