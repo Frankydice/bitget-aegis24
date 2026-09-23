@@ -62,11 +62,11 @@ export const Header: React.FC<HeaderProps> = ({ status, activeTab, setActiveTab 
           {/* Circuit Breaker Status */}
           <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg bg-bg-darkest border border-bg-border">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${status?.circuit_breaker?.tripped ? 'bg-brand-red' : 'bg-brand-green'}`}></span>
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${status?.circuit_breaker?.tripped ? 'bg-brand-red' : 'bg-brand-green'}`}></span>
             </span>
-            <span className="text-xs font-mono text-slate-300">
-              {status?.circuit_breaker.status === 'NORMAL' ? 'SEATBELT ARMED' : 'CIRCUIT TRIPPED'}
+            <span className={`text-xs font-mono ${status?.circuit_breaker?.tripped ? 'text-brand-red font-semibold' : 'text-slate-300'}`}>
+              {status?.circuit_breaker?.tripped ? 'CIRCUIT TRIPPED' : 'SEATBELT ARMED'}
             </span>
           </div>
 

@@ -31,7 +31,7 @@ export const fallbackStatus: SystemStatus = {
     day_start_equity: 101124.0,
     current_equity: 101245.8,
     trip_reason: null,
-    status: "HEALTHY"
+    status: "NORMAL"
   },
   server_time_utc: new Date().toUTCString()
 };
