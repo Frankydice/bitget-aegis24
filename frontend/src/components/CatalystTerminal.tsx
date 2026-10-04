@@ -11,6 +11,7 @@ export const CatalystTerminal: React.FC<CatalystTerminalProps> = ({ onEventProce
   const [activeLoadingId, setActiveLoadingId] = useState<string | null>(null);
   const [isCustomLoading, setIsCustomLoading] = useState(false);
   const [showCustomForm, setShowCustomForm] = useState(false);
+  const [justTriggered, setJustTriggered] = useState<boolean>(false);
 
   // Preset Shocks
   const presets = [
@@ -76,6 +77,8 @@ export const CatalystTerminal: React.FC<CatalystTerminalProps> = ({ onEventProce
         time: new Date().toLocaleTimeString(),
         result: res
       });
+      setJustTriggered(true);
+      setTimeout(() => setJustTriggered(false), 3500);
       onEventProcessed(res);
     } catch (e) {
       console.error(e);
@@ -100,6 +103,8 @@ export const CatalystTerminal: React.FC<CatalystTerminalProps> = ({ onEventProce
         time: new Date().toLocaleTimeString(),
         result: res
       });
+      setJustTriggered(true);
+      setTimeout(() => setJustTriggered(false), 3500);
       onEventProcessed(res);
     } catch (e) {
       console.error(e);
@@ -173,40 +178,49 @@ export const CatalystTerminal: React.FC<CatalystTerminalProps> = ({ onEventProce
   return (
     <section id="catalyst-terminal" className="space-y-6">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/5">
         <div>
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-brand-cyan/15 border border-brand-cyan/30 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-brand-cyan" />
-            </div>
-            <div>
-              <h2 className="text-xl font-extrabold text-white tracking-tight font-sans">
-                Interactive Catalyst Simulation Terminal
-              </h2>
-            </div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-bold text-white tracking-tight font-sans">
+              Interactive Catalyst Simulation Terminal
+            </h2>
+            <span className="rounded-full bg-blue-500/15 border border-blue-500/25 px-2.5 py-0.5 text-[10px] font-mono text-blue-300 font-semibold">
+              24/7 EVENT INJECTOR
+            </span>
           </div>
-          <p className="text-xs text-slate-400 font-mono mt-1">
-            Simulate off-hours market shocks to trigger Perception $\rightarrow$ Multi-Agent Deliberation $\rightarrow$ Deterministic Seatbelt Execution
+          <p className="text-xs text-neutral-400 font-normal mt-0.5">
+            Simulate off-hours market shocks to trigger Perception &rarr; Multi-Agent Deliberation &rarr; Deterministic Seatbelt Execution
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={handleLoadExample}
-            className="px-3 py-1.5 rounded-lg bg-[#0e1116] border border-white/[0.1] hover:border-brand-cyan/40 hover:bg-[#141822] text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-xs font-mono text-neutral-300 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
-            <span>Load Example Scenario</span>
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>Load Example</span>
           </button>
 
           <button
             onClick={() => setShowCustomForm(!showCustomForm)}
-            className="px-3 py-1.5 rounded-lg bg-brand-cyan/15 border border-brand-cyan/30 text-brand-cyan text-xs font-mono font-semibold hover:bg-brand-cyan hover:text-black transition-all cursor-pointer"
+            className="px-4 py-1.5 rounded-full bg-white text-black text-xs font-semibold hover:bg-neutral-200 transition-colors cursor-pointer shadow-sm"
           >
-            {showCustomForm ? 'Collapse Custom Builder' : 'Custom Catalyst Builder'}
+            {showCustomForm ? 'Collapse Builder' : 'Custom Builder'}
           </button>
         </div>
       </div>
+
+      {/* Electric Lightning Strike Notification Banner */}
+      {justTriggered && (
+        <div className="animate-fadeIn p-3.5 rounded-2xl border border-blue-500/40 bg-blue-950/30 text-blue-200 flex items-center justify-between text-xs font-mono shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+          <div className="flex items-center gap-2.5">
+            <Zap className="w-4 h-4 text-blue-400 fill-blue-400 animate-bounce" />
+            <span className="font-semibold text-white">CATALYST INJECTED · SWARM DELIBERATION TRIGGERED</span>
+          </div>
+          <span className="text-[11px] text-blue-300">Evaluating 5 Mathematical Gates...</span>
+        </div>
+      )}
 
       {/* Preset Catalysts 4-Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

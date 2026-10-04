@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { TopNav } from './components/TopNav';
+import { HeroLighting } from './components/HeroLighting';
 import { HeroSection } from './components/HeroSection';
 import { PrimaryDashboard } from './components/PrimaryDashboard';
 import { CatalystTerminal } from './components/CatalystTerminal';
@@ -161,9 +162,9 @@ export default function App() {
           onSimulateClick={() => handleNavigate('catalyst-terminal')}
         />
 
-        {/* Parallel Signature Ambient Background Guide Lines */}
+        {/* Parallel Signature Ambient Background Guide Lines & Animated Lighting Canvas */}
         <div className="relative flex-1">
-          <div className="grid-lines absolute inset-0 mx-auto max-w-7xl border-r border-l border-white/[0.03] pointer-events-none -z-0" />
+          <HeroLighting />
 
           <main className="relative z-10 px-4 sm:px-6 lg:px-8 py-6 sm:py-10 max-w-7xl mx-auto w-full space-y-16">
             {/* 1. Hero Overview & 5 At-A-Glance Stat Cards */}

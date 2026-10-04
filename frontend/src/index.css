@@ -41,7 +41,60 @@
   background-size: 100% 100%;
 }
 
-/* Shimmer and pulse animations */
+/* Parallel entrance & lightning keyframe animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes electricPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), 0 0 30px rgba(0, 229, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), 0 0 50px rgba(0, 229, 255, 0.25);
+  }
+}
+
+@keyframes lightningSweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+    opacity: 0;
+  }
+}
+
+.lightning-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.lightning-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), rgba(0, 229, 255, 0.3), transparent);
+  animation: lightningSweep 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Shimmer animation */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }

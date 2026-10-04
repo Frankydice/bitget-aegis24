@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
 import { BacktestReport, SystemStatus } from '../services/api';
 
 interface HeroSectionProps {
@@ -70,50 +70,53 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
   ];
 
   return (
-    <section id="hero" className="relative pt-6 sm:pt-10 pb-6">
-      {/* Background Subtle Gradient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-gradient-to-b from-blue-600/[0.06] via-brand-cyan/[0.02] to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-
-      {/* Main Headline & Value Proposition */}
-      <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 px-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs text-neutral-300 shadow-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
-          <span className="font-mono text-[11px]">Bitget Hackathon Season 2 · Track 2: Agentic Trading</span>
+    <section id="hero" className="relative pt-8 sm:pt-14 pb-8">
+      {/* Main Headline & Value Proposition with Parallel animations */}
+      <div className="text-center max-w-3xl mx-auto space-y-5 mb-12 px-4">
+        {/* Floating Illuminated Pill Tag with Electric Glow */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/20 px-4 py-1 text-xs text-blue-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] animate-pulse" style={{ animationDuration: '3s' }}>
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+          </span>
+          <span className="font-mono text-[11px] tracking-wide uppercase">
+            Bitget AI Hackathon S2 · Track 2: Agentic Trading
+          </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-bold text-white tracking-tight leading-[1.15] font-sans">
+        <h1 className="text-4xl sm:text-6xl font-medium text-white tracking-tight leading-[1.08] font-sans">
           When US Equities Trade 24/7, <br />
-          <span className="bg-gradient-to-r from-blue-400 via-brand-cyan to-emerald-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 via-brand-cyan to-white bg-clip-text text-transparent">
             Humans Sleep — Agents Don't.
           </span>
         </h1>
 
-        <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed font-light tracking-tight">
           Aegis24 pairs probabilistic multi-agent reasoning with a deterministic quantitative safety seatbelt to autonomously capture off-hours rToken alpha without human emotion or thin-book slippage.
         </p>
 
-        {/* Parallel-Style CTA Actions */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+        {/* Parallel-Style CTA Actions with Electric Button Highlight */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
           <a
             href="#catalyst-terminal"
-            className="flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-semibold text-black hover:bg-neutral-200 active:scale-[0.98] transition-all duration-150 shadow-sm cursor-pointer"
+            className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-semibold text-black transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-[0_0_25px_rgba(255,255,255,0.2)] cursor-pointer"
           >
-            <Zap className="h-3.5 w-3.5 fill-black" />
+            <Zap className="h-3.5 w-3.5 fill-black text-black group-hover:scale-110 transition-transform" />
             <span>Simulate Catalyst Shock</span>
-            <ArrowRight className="h-3 w-3 text-neutral-600" />
+            <ArrowRight className="h-3 w-3 text-neutral-600 group-hover:translate-x-1 transition-transform" />
           </a>
 
           <a
             href="#risk-matrix"
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.06] hover:border-white/20 active:scale-[0.98] transition-all cursor-pointer"
+            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.06] hover:border-white/20 active:scale-[0.98] transition-all cursor-pointer shadow-sm"
           >
-            <ShieldCheck className="h-3.5 w-3.5 text-brand-cyan" />
+            <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
             <span>Inspect Safety Corridor</span>
           </a>
         </div>
       </div>
 
-      {/* Row of 5 Metric Cards */}
+      {/* Row of 5 Metric Cards with Lightning Shimmer Sweep */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-7xl mx-auto">
         {statCards.map((card) => {
           const Icon = card.icon;
@@ -138,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
           return (
             <div
               key={card.id}
-              className="p-4 rounded-2xl border border-white/5 bg-[#070707] hover:border-white/15 hover:bg-[#0c0c0e] transition-all duration-150 flex flex-col justify-between group shadow-sm"
+              className="p-4 rounded-2xl border border-white/5 bg-[#070707] hover:border-white/15 hover:bg-[#0c0c0e] transition-all duration-200 flex flex-col justify-between group shadow-sm lightning-sweep"
             >
               <div className="flex items-center justify-between text-xs mb-1">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-medium">
