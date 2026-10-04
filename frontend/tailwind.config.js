@@ -8,13 +8,17 @@ export default {
     extend: {
       colors: {
         bg: {
-          darkest: '#090a0c',
-          card: '#121418',
-          border: '#23272f',
-          hover: '#1b1f26'
+          darkest: '#020202',
+          sidebar: '#070707',
+          surface: '#0c0c0e',
+          card: '#0a0a0c',
+          cardHover: '#111114',
+          border: 'rgba(255, 255, 255, 0.05)',
+          borderMedium: 'rgba(255, 255, 255, 0.10)',
         },
         brand: {
           cyan: '#00E5FF',
+          blue: '#3b82f6',
           teal: '#03AAC7',
           green: '#26c99b',
           red: '#f7647e',
@@ -22,8 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Roboto Mono', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif']
+        mono: ['JetBrains Mono', 'Roboto Mono', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
       }
     },
   },

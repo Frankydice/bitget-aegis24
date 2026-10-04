@@ -38,3 +38,8 @@ frontend/dist-ssr/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Media & Recordings (>100MB)
+*.mp4
+*.mp3
+*.mov
