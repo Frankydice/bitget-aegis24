@@ -12,6 +12,7 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
+audio_temp/
 
 # Node & Frontend
 node_modules/
@@ -43,3 +44,5 @@ Thumbs.db
 *.mp4
 *.mp3
 *.mov
+!frontend/public/audio/*.mp3
+!frontend/public/video/*.mp4

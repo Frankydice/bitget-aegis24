@@ -35,20 +35,20 @@ interface Scene {
 }
 
 const SCENES: Scene[] = [
-  { id: 1, title: 'The 65-Hour Market Darkness', subtitle: 'Continuous Off-Hours Volatility Without Discretion', startTime: 0, endTime: 7.5 },
-  { id: 2, title: '24/7 rToken Orderbook Discovery', subtitle: 'Synthetic US Equities on Bitget MCP', startTime: 7.5, endTime: 15.5 },
-  { id: 3, title: 'Weekend Shockwave Injection', subtitle: 'Autonomous Perception of Breaking Catalysts', startTime: 15.5, endTime: 23.5 },
-  { id: 4, title: 'Cognitive Swarm Deliberation', subtitle: 'Multi-Agent Consensus & Conviction Sizing', startTime: 23.5, endTime: 31.5 },
-  { id: 5, title: '5 Deterministic Safety Gates', subtitle: 'Zero-Discretion Hardware Seatbelt', startTime: 31.5, endTime: 39.5 },
-  { id: 6, title: 'Execution & Out-of-Sample Alpha', subtitle: '+19.64% Audited 60-Day Equity Trajectory', startTime: 39.5, endTime: 48.0 }
+  { id: 1, title: 'The 65-Hour Market Darkness', subtitle: 'Continuous Off-Hours Volatility Without Discretion', startTime: 0, endTime: 26.04 },
+  { id: 2, title: '24/7 rToken Orderbook Discovery', subtitle: 'Synthetic US Equities on Bitget MCP', startTime: 26.04, endTime: 49.10 },
+  { id: 3, title: 'Weekend Shockwave Injection', subtitle: 'Autonomous Perception of Breaking Catalysts', startTime: 49.10, endTime: 69.19 },
+  { id: 4, title: 'Cognitive Swarm Deliberation', subtitle: 'Multi-Agent Consensus & Conviction Sizing', startTime: 69.19, endTime: 86.30 },
+  { id: 5, title: '5 Deterministic Safety Gates', subtitle: 'Zero-Discretion Hardware Seatbelt', startTime: 86.30, endTime: 111.09 },
+  { id: 6, title: 'Execution & Out-of-Sample Alpha', subtitle: '+19.64% Audited 60-Day Equity Trajectory', startTime: 111.09, endTime: 138.31 }
 ];
 
-const TOTAL_DURATION = 48.0;
+const TOTAL_DURATION = 138.31;
 
 export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isRecording, setIsRecording] = useState(false);
   const [recordProgress, setRecordProgress] = useState(0);
@@ -57,8 +57,36 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
   const animFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const voiceAudioRef = useRef<HTMLAudioElement | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordedChunksRef = useRef<Blob[]>([]);
+
+  // Synchronize neural voiceover with playback state, mute, speed, and time
+  useEffect(() => {
+    if (!voiceAudioRef.current) return;
+    voiceAudioRef.current.muted = isMuted;
+  }, [isMuted]);
+
+  useEffect(() => {
+    if (!voiceAudioRef.current) return;
+    voiceAudioRef.current.playbackRate = playbackSpeed;
+  }, [playbackSpeed]);
+
+  useEffect(() => {
+    if (!voiceAudioRef.current) return;
+    if (isPlaying && isOpen) {
+      voiceAudioRef.current.play().catch(() => {});
+    } else {
+      voiceAudioRef.current.pause();
+    }
+  }, [isPlaying, isOpen]);
+
+  const handleSeek = (newTime: number) => {
+    setCurrentTime(newTime);
+    if (voiceAudioRef.current) {
+      voiceAudioRef.current.currentTime = newTime;
+    }
+  };
 
   // Sound synthesis helpers using standard Web Audio API
   const playSound = useCallback((type: 'bass' | 'shock' | 'gate' | 'success') => {
@@ -336,8 +364,8 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // ==========================================
     // SCENE 1: THE THESIS & 65-HOUR DARKNESS
     // ==========================================
-    if (t < 7.5) {
-      const p = t / 7.5;
+    if (t < 26.04) {
+      const p = t / 26.04;
       const fadeIn = Math.min(1, t * 1.5);
       ctx.save();
       ctx.globalAlpha = fadeIn;
@@ -390,8 +418,8 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // ==========================================
     // SCENE 2: 24/7 rTOKEN ORDERBOOK DISCOVERY
     // ==========================================
-    else if (t < 15.5) {
-      const p = (t - 7.5) / 8.0;
+    else if (t < 49.10) {
+      const p = (t - 26.04) / 23.06;
       ctx.save();
       ctx.textAlign = 'left';
 
@@ -475,8 +503,8 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // ==========================================
     // SCENE 3: WEEKEND SHOCKWAVE INJECTION
     // ==========================================
-    else if (t < 23.5) {
-      const p = (t - 15.5) / 8.0;
+    else if (t < 69.19) {
+      const p = (t - 49.10) / 20.09;
       ctx.save();
       ctx.textAlign = 'center';
 
@@ -555,8 +583,8 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // ==========================================
     // SCENE 4: COGNITIVE SWARM DELIBERATION
     // ==========================================
-    else if (t < 31.5) {
-      const p = (t - 23.5) / 8.0;
+    else if (t < 86.30) {
+      const p = (t - 69.19) / 17.11;
       ctx.save();
       ctx.textAlign = 'left';
 
@@ -639,8 +667,8 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // ==========================================
     // SCENE 5: THE 5 DETERMINISTIC SAFETY GATES
     // ==========================================
-    else if (t < 39.5) {
-      const p = (t - 31.5) / 8.0;
+    else if (t < 111.09) {
+      const p = (t - 86.30) / 24.79;
       ctx.save();
       ctx.textAlign = 'left';
 
@@ -704,7 +732,7 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
     // SCENE 6: EXECUTION & OUT-OF-SAMPLE ALPHA
     // ==========================================
     else {
-      const p = (t - 39.5) / 8.5;
+      const p = (t - 111.09) / 27.22;
       ctx.save();
       ctx.textAlign = 'center';
 
@@ -799,26 +827,38 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
           </div>
 
           {/* Quick Actions: Recording, Audio & Close */}
-          <div className="flex items-center gap-3">
+          {/* Quick Actions: Recording, Audio & Close */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Download Master HD MP4 Showcase Video */}
+            <a
+              href="/video/aegis24_motion_design_showcase.mp4"
+              download="aegis24_motion_design_showcase.mp4"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-black hover:brightness-110 transition-all shadow-md cursor-pointer"
+              title="Download 1080p Master Motion Design Video with Neural Voiceover"
+            >
+              <Download className="w-3.5 h-3.5 text-black stroke-[2.5]" />
+              <span className="font-bold">Download HD MP4</span>
+            </a>
+
             {/* Record / Export MP4/WebM Button */}
             <button
               onClick={isRecording ? stopRecording : startRecording}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all shadow-sm cursor-pointer ${
+              className={`hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all shadow-sm cursor-pointer ${
                 isRecording
                   ? 'bg-rose-500 text-white animate-pulse'
-                  : 'bg-white text-black hover:bg-neutral-200'
+                  : 'bg-white/10 text-white hover:bg-white/20'
               }`}
               title="Record and export 60fps video directly to downloads"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>{isRecording ? `Recording (${recordProgress}%)` : 'Export Video Reel'}</span>
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{isRecording ? `Recording (${recordProgress}%)` : 'Live Web Rec'}</span>
             </button>
 
             {/* Sound Toggle */}
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="p-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white transition-colors cursor-pointer"
-              title={isMuted ? 'Unmute Sound FX' : 'Mute Sound FX'}
+              title={isMuted ? 'Unmute Voiceover & FX' : 'Mute Voiceover & FX'}
             >
               {isMuted ? <VolumeX className="w-4 h-4 text-neutral-500" /> : <Volume2 className="w-4 h-4 text-cyan-400" />}
             </button>
@@ -851,7 +891,7 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
               max={TOTAL_DURATION}
               step={0.1}
               value={currentTime}
-              onChange={(e) => setCurrentTime(parseFloat(e.target.value))}
+              onChange={(e) => handleSeek(parseFloat(e.target.value))}
               className="w-full h-1.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
             />
             {/* Scene Markers */}
@@ -859,7 +899,7 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
               {SCENES.map((s) => (
                 <button
                   key={s.id}
-                  onClick={() => setCurrentTime(s.startTime)}
+                  onClick={() => handleSeek(s.startTime)}
                   className={`hover:text-white transition-colors cursor-pointer truncate ${
                     activeScene.id === s.id ? 'text-blue-400 font-bold' : ''
                   }`}
@@ -881,7 +921,7 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
               </button>
 
               <button
-                onClick={() => setCurrentTime(0)}
+                onClick={() => handleSeek(0)}
                 className="p-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 title="Restart Reel"
               >
@@ -918,6 +958,16 @@ export const MotionShowcase: React.FC<MotionShowcaseProps> = ({ isOpen, onClose 
             </div>
           </div>
         </div>
+
+        {/* Hidden Audio Player for Master Neural Voiceover */}
+        <audio
+          ref={voiceAudioRef}
+          src="/audio/voiceover.mp3"
+          preload="auto"
+          onEnded={() => {
+            setIsPlaying(false);
+          }}
+        />
       </div>
     </div>
   );
