@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import { BacktestReport, SystemStatus } from '../services/api';
 
 interface HeroSectionProps {
@@ -31,7 +31,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
       iconBg: 'bg-emerald-500/10 border-emerald-500/20',
       value: metrics ? `${metrics.sortino_ratio.toFixed(2)}` : '3.12',
       subValue: 'Downside Vol: 0.82%',
-      subColor: 'text-neutral-400',
+      subColor: 'text-neutral-500',
       valueColor: 'text-white'
     },
     {
@@ -41,7 +41,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
       iconColor: 'text-amber-400',
       iconBg: 'bg-amber-500/10 border-amber-500/20',
       value: metrics ? `-${metrics.max_drawdown_pct.toFixed(1)}%` : '-7.2%',
-      subValue: 'Breaker Cap: -2.0%',
+      subValue: 'Hard Breaker: -2.0%',
       subColor: 'text-amber-400/90',
       valueColor: 'text-amber-300'
     },
@@ -49,12 +49,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
       id: 'decay',
       label: 'OOS / IS Decay',
       icon: RefreshCw,
-      iconColor: 'text-brand-cyan',
-      iconBg: 'bg-cyan-500/10 border-cyan-500/20',
+      iconColor: 'text-blue-400',
+      iconBg: 'bg-blue-500/10 border-blue-500/20',
       value: metrics ? `${metrics.sharpe_decay_ratio.toFixed(2)}` : '0.88',
       subValue: '> 0.50 Zero Overfit',
       subColor: 'text-emerald-400 font-medium',
-      valueColor: 'text-brand-cyan'
+      valueColor: 'text-blue-300'
     },
     {
       id: 'return',
@@ -71,47 +71,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
 
   return (
     <section id="hero" className="relative pt-8 sm:pt-14 pb-8">
-      {/* Main Headline & Value Proposition with Parallel animations */}
-      <div className="text-center max-w-3xl mx-auto space-y-5 mb-12 px-4">
-        {/* Floating Illuminated Pill Tag with Electric Glow */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/20 px-4 py-1 text-xs text-blue-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] animate-pulse" style={{ animationDuration: '3s' }}>
-          <span className="relative flex h-2 w-2">
+      {/* Main Headline & Value Proposition with Exact Parallel Screenshot Color Combination */}
+      <div className="text-center max-w-4xl mx-auto space-y-4 mb-14 px-4">
+        {/* Floating Illuminated Pill Tag matching screenshot */}
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-950/10 px-3.5 py-1 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.15)] [animation:fadeInUp_0.8s_ease-out_0.1s_both]">
+          <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.9)]" />
           </span>
-          <span className="font-mono text-[11px] tracking-wide uppercase">
-            Bitget AI Hackathon S2 · Track 2: Agentic Trading
-          </span>
+          <span>24/7 Autonomous rToken Agent Desk · Bitget S2</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-medium text-white tracking-tight leading-[1.08] font-sans">
-          When US Equities Trade 24/7, <br />
-          <span className="bg-gradient-to-r from-blue-400 via-brand-cyan to-white bg-clip-text text-transparent">
-            Humans Sleep — Agents Don't.
+        {/* Dual-Tone Headline matching screenshot: Pure White top line, Soft Muted Neutral-400 bottom line */}
+        <h1 className="mb-6 text-balance text-4xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.05] tracking-tight text-white font-sans [animation:fadeInUp_0.8s_ease-out_0.2s_both]">
+          When US equities trade 24/7. <br />
+          <span className="text-neutral-400 font-normal">
+            Humans sleep, agents don't.
           </span>
         </h1>
 
-        <p className="text-sm sm:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed font-light tracking-tight">
-          Aegis24 pairs probabilistic multi-agent reasoning with a deterministic quantitative safety seatbelt to autonomously capture off-hours rToken alpha without human emotion or thin-book slippage.
+        {/* Subtitle Paragraph in Muted Neutral-300 font-light matching reference */}
+        <p className="mx-auto mb-9 max-w-xl text-base font-light md:text-lg leading-relaxed text-neutral-300 tracking-tight [animation:fadeInUp_0.8s_ease-out_0.3s_both]">
+          Aegis24 turns continuous tokenized US equity orderbooks into a coordinated autonomous strategy, with a deterministic hardware seatbelt when real life gets in the way.
         </p>
 
-        {/* Parallel-Style CTA Actions with Electric Button Highlight */}
-        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
+        {/* High-Contrast White Pill CTA matching screenshot (Single centered hero pill) */}
+        <div className="flex flex-col items-center justify-center gap-3 [animation:fadeInUp_0.8s_ease-out_0.4s_both]">
           <a
             href="#catalyst-terminal"
-            className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-semibold text-black transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-[0_0_25px_rgba(255,255,255,0.2)] cursor-pointer"
+            className="group relative flex items-center gap-2 rounded-full bg-white text-black px-8 py-3 text-sm font-medium transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-sm cursor-pointer"
           >
-            <Zap className="h-3.5 w-3.5 fill-black text-black group-hover:scale-110 transition-transform" />
-            <span>Simulate Catalyst Shock</span>
-            <ArrowRight className="h-3 w-3 text-neutral-600 group-hover:translate-x-1 transition-transform" />
+            <span>Try the live desk</span>
+            <ArrowRight className="h-4 w-4 text-black transition-transform group-hover:translate-x-0.5" />
           </a>
 
           <a
-            href="#risk-matrix"
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.06] hover:border-white/20 active:scale-[0.98] transition-all cursor-pointer shadow-sm"
+            href="#deliberation-engine"
+            className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors pt-1 flex items-center gap-1 cursor-pointer"
           >
-            <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-            <span>Inspect Safety Corridor</span>
+            <span>or inspect the 5 deterministic safety gates</span>
+            <span className="text-neutral-600">↓</span>
           </a>
         </div>
       </div>
@@ -141,7 +140,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
           return (
             <div
               key={card.id}
-              className="p-4 rounded-2xl border border-white/5 bg-[#070707] hover:border-white/15 hover:bg-[#0c0c0e] transition-all duration-200 flex flex-col justify-between group shadow-sm lightning-sweep"
+              className="p-4.5 rounded-2xl border border-white/5 bg-[#070707] hover:border-white/15 hover:bg-[#0c0c0e] transition-all duration-200 flex flex-col justify-between group shadow-sm lightning-sweep"
             >
               <div className="flex items-center justify-between text-xs mb-1">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-medium">

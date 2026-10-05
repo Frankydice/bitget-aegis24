@@ -51,60 +51,73 @@ export const TopNav: React.FC<TopNavProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/5 bg-[#020202]/90 backdrop-blur-md px-4 sm:px-6 py-3 transition-colors">
-      {/* Left: Mobile Menu & Breadcrumbs */}
+    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/5 bg-[#020202]/80 backdrop-blur-md px-4 sm:px-8 py-3.5 transition-colors">
+      {/* Left: Brand Icon + Aegis24 Logo & Mobile Menu */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileMenu}
-          className="lg:hidden p-2 -ml-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+          className="lg:hidden p-1.5 -ml-1 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
           aria-label="Open navigation menu"
         >
           <Menu className="h-5 w-5" />
         </button>
 
-        <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="text-neutral-500 hidden sm:inline">Aegis24</span>
-          <span className="text-neutral-600 hidden sm:inline">/</span>
-          <span className="text-white font-medium truncate max-w-[180px] sm:max-w-none">
-            {getSectionTitle(activeSection)}
+        <a href="#hero" className="flex items-center gap-2.5 group">
+          <div className="h-7 w-7 rounded-lg bg-gradient-to-tr from-blue-600 via-brand-cyan to-white flex items-center justify-center shadow-sm shadow-blue-500/20 ring-1 ring-white/10">
+            <ShieldCheck className="h-4 w-4 text-black stroke-[2.5]" />
+          </div>
+          <span className="text-sm font-semibold tracking-tight text-white font-sans group-hover:text-neutral-200 transition-colors">
+            Aegis<span className="text-brand-cyan">24</span>
           </span>
-        </div>
+        </a>
       </div>
 
-      {/* Center/Right: Live Telemetry & Actions */}
-      <div className="flex items-center gap-2.5 sm:gap-3">
-        {/* Fast Telemetry Pills */}
-        <div className="hidden md:flex items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-neutral-300">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-            </span>
-            <span>bitget-mcp-server: 12ms</span>
-          </div>
-
-          <div className="flex items-center gap-1.5 rounded-full border border-white/5 bg-white/[0.02] px-2.5 py-1 text-[11px] font-mono text-neutral-400">
-            <Activity className="h-3 w-3 text-brand-cyan" />
-            <span>24/7 Engine Active</span>
-          </div>
-        </div>
-
-        {/* Primary Action Button (Parallel signature white pill) */}
-        <button
-          onClick={onSimulateClick}
-          className="flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-black hover:bg-neutral-200 active:scale-[0.98] transition-all duration-150 shadow-sm cursor-pointer"
+      {/* Center: Parallel Signature Muted Navigation Links */}
+      <nav className="hidden md:flex items-center gap-7 text-xs font-normal text-neutral-400">
+        <a
+          href="#dashboard"
+          className="hover:text-white transition-colors cursor-pointer"
         >
-          <Zap className="h-3.5 w-3.5 fill-black" />
-          <span>Simulate Shock</span>
-        </button>
-
-        {/* Quick Anchor to Risk Corridor */}
+          How it works
+        </a>
+        <a
+          href="#catalyst-terminal"
+          className="hover:text-white transition-colors cursor-pointer"
+        >
+          Shock Terminal
+        </a>
         <a
           href="#deliberation-engine"
-          className="hidden sm:flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.06] transition-colors"
+          className="hover:text-white transition-colors cursor-pointer"
         >
-          <ShieldCheck className="h-3.5 w-3.5 text-brand-cyan" />
-          <span>Inspect 5 Gates</span>
+          Deliberation Swarm
+        </a>
+        <a
+          href="#risk-matrix"
+          className="hover:text-white transition-colors cursor-pointer"
+        >
+          Safety Corridor
+        </a>
+      </nav>
+
+      {/* Right: Actions matching screenshot "Open the board ↗" pill */}
+      <div className="flex items-center gap-3">
+        {/* Telemetry pill */}
+        <div className="hidden xl:flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-neutral-400">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+          </span>
+          <span>bitget-mcp: 12ms</span>
+        </div>
+
+        {/* Primary Action Button (Parallel signature capsule pill) */}
+        <a
+          href="#dashboard"
+          className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] hover:bg-white/10 hover:border-white/20 active:scale-[0.98] px-4 py-1.5 text-xs font-medium text-neutral-200 hover:text-white transition-all duration-150 shadow-sm cursor-pointer"
+        >
+          <span>Open the desk</span>
+          <ArrowUpRight className="h-3.5 w-3.5 text-neutral-400 group-hover:text-white" />
         </a>
       </div>
     </header>
