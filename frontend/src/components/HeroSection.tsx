@@ -75,7 +75,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
       {/* Main Headline & Value Proposition with Exact Parallel Screenshot Color Combination */}
       <div className="text-center max-w-4xl mx-auto space-y-4 mb-14 px-4">
         {/* Floating Illuminated Pill Tag matching screenshot */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-950/10 px-3.5 py-1 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.15)] [animation:fadeInUp_0.8s_ease-out_0.1s_both]">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-950/10 px-3.5 py-1 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.9)]" />
@@ -84,7 +84,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
         </div>
 
         {/* Dual-Tone Headline matching screenshot: Pure White top line, Soft Muted Neutral-400 bottom line */}
-        <h1 className="mb-6 text-balance text-4xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.05] tracking-tight text-white font-sans [animation:fadeInUp_0.8s_ease-out_0.2s_both]">
+        <h1 className="mb-6 text-balance text-4xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.05] tracking-tight text-white font-sans">
           When US equities trade 24/7. <br />
           <span className="text-neutral-400 font-normal">
             Humans sleep, agents don't.
@@ -92,12 +92,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
         </h1>
 
         {/* Subtitle Paragraph in Muted Neutral-300 font-light matching reference */}
-        <p className="mx-auto mb-9 max-w-xl text-base font-light md:text-lg leading-relaxed text-neutral-300 tracking-tight [animation:fadeInUp_0.8s_ease-out_0.3s_both]">
+        <p className="mx-auto mb-9 max-w-xl text-base font-light md:text-lg leading-relaxed text-neutral-300 tracking-tight">
           Aegis24 turns continuous tokenized US equity orderbooks into a coordinated autonomous strategy, with a deterministic hardware seatbelt when real life gets in the way.
         </p>
 
         {/* High-Contrast Actions: White Pill CTA + Watch Motion Showcase Reel */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2 [animation:fadeInUp_0.8s_ease-out_0.4s_both]">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
           <a
             href="#catalyst-terminal"
             className="group relative flex items-center gap-2 rounded-full bg-white text-black px-8 py-3.5 text-sm font-semibold transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-sm cursor-pointer"
@@ -117,7 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
           )}
         </div>
 
-        <div className="pt-2 [animation:fadeInUp_0.8s_ease-out_0.5s_both]">
+        <div className="pt-2">
           <a
             href="#deliberation-engine"
             className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors inline-flex items-center gap-1 cursor-pointer"

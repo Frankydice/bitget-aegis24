@@ -96,13 +96,14 @@ export default function App() {
         api.getBacktest()
       ]);
 
-      setStatus(statusData);
-      setMarket(marketData);
-      setDebates(debatesData?.debates || []);
-      setEvaluations(evalsData?.evaluations || []);
-      setPositions(positionsData?.positions || []);
-      setPaperLogs(logsData?.logs || []);
-      setBacktestReport(backtestData);
+      // Only update state if data actually changed to prevent unnecessary component thrashing
+      setStatus(prev => JSON.stringify(prev) === JSON.stringify(statusData) ? prev : statusData);
+      setMarket(prev => JSON.stringify(prev) === JSON.stringify(marketData) ? prev : marketData);
+      setDebates(prev => JSON.stringify(prev) === JSON.stringify(debatesData?.debates) ? prev : (debatesData?.debates || []));
+      setEvaluations(prev => JSON.stringify(prev) === JSON.stringify(evalsData?.evaluations) ? prev : (evalsData?.evaluations || []));
+      setPositions(prev => JSON.stringify(prev) === JSON.stringify(positionsData?.positions) ? prev : (positionsData?.positions || []));
+      setPaperLogs(prev => JSON.stringify(prev) === JSON.stringify(logsData?.logs) ? prev : (logsData?.logs || []));
+      setBacktestReport(prev => JSON.stringify(prev) === JSON.stringify(backtestData) ? prev : backtestData);
     } catch (e) {
       console.error("Data polling error:", e);
     } finally {
@@ -112,7 +113,11 @@ export default function App() {
 
   useEffect(() => {
     fetchAllData();
-    const interval = setInterval(fetchAllData, 4000);
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && !document.hidden) {
+        fetchAllData();
+      }
+    }, 6000);
     return () => clearInterval(interval);
   }, [fetchAllData]);
 
