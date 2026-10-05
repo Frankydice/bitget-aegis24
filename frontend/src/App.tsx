@@ -15,6 +15,7 @@ import { RecommendationsSection } from './components/RecommendationsSection';
 import { TrustSection } from './components/TrustSection';
 import { Footer } from './components/Footer';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { MotionShowcase } from './components/MotionShowcase';
 import {
   api,
   SystemStatus,
@@ -42,6 +43,7 @@ export default function App() {
   // Parallel-style navigation state
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isMotionOpen, setIsMotionOpen] = useState<boolean>(false);
 
   const sectionIds = useMemo(
     () => [
@@ -160,6 +162,7 @@ export default function App() {
           activeSection={activeSection}
           onOpenMobileMenu={() => setMobileMenuOpen(true)}
           onSimulateClick={() => handleNavigate('catalyst-terminal')}
+          onOpenMotionShowcase={() => setIsMotionOpen(true)}
         />
 
         {/* Parallel Signature Ambient Background Guide Lines & Animated Lighting Canvas */}
@@ -173,6 +176,7 @@ export default function App() {
                 report={backtestReport}
                 status={status}
                 isLoading={isLoading}
+                onOpenMotionShowcase={() => setIsMotionOpen(true)}
               />
             </ErrorBoundary>
 
@@ -258,6 +262,12 @@ export default function App() {
           <Footer logs={paperLogs} />
         </ErrorBoundary>
       </div>
+
+      {/* 13. High-Definition Broadcast Motion Design Showcase Player */}
+      <MotionShowcase
+        isOpen={isMotionOpen}
+        onClose={() => setIsMotionOpen(false)}
+      />
     </div>
   );
 }

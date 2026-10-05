@@ -1,14 +1,15 @@
 import React from 'react';
-import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Award, TrendingUp, ShieldAlert, RefreshCw, BarChart3, Zap, ShieldCheck, ArrowRight, Play } from 'lucide-react';
 import { BacktestReport, SystemStatus } from '../services/api';
 
 interface HeroSectionProps {
   report: BacktestReport | null;
   status: SystemStatus | null;
   isLoading?: boolean;
+  onOpenMotionShowcase?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoading = false }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoading = false, onOpenMotionShowcase }) => {
   const metrics = report?.summary_metrics;
 
   const statCards = [
@@ -95,19 +96,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ report, status, isLoad
           Aegis24 turns continuous tokenized US equity orderbooks into a coordinated autonomous strategy, with a deterministic hardware seatbelt when real life gets in the way.
         </p>
 
-        {/* High-Contrast White Pill CTA matching screenshot (Single centered hero pill) */}
-        <div className="flex flex-col items-center justify-center gap-3 [animation:fadeInUp_0.8s_ease-out_0.4s_both]">
+        {/* High-Contrast Actions: White Pill CTA + Watch Motion Showcase Reel */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2 [animation:fadeInUp_0.8s_ease-out_0.4s_both]">
           <a
             href="#catalyst-terminal"
-            className="group relative flex items-center gap-2 rounded-full bg-white text-black px-8 py-3 text-sm font-medium transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-sm cursor-pointer"
+            className="group relative flex items-center gap-2 rounded-full bg-white text-black px-8 py-3.5 text-sm font-semibold transition-all hover:bg-neutral-200 active:scale-[0.98] shadow-sm cursor-pointer"
           >
             <span>Try the live desk</span>
             <ArrowRight className="h-4 w-4 text-black transition-transform group-hover:translate-x-0.5" />
           </a>
 
+          {onOpenMotionShowcase && (
+            <button
+              onClick={onOpenMotionShowcase}
+              className="group relative flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/25 hover:bg-blue-900/35 px-7 py-3.5 text-sm font-semibold text-blue-300 hover:text-white transition-all shadow-[0_0_20px_rgba(59,130,246,0.18)] active:scale-[0.98] cursor-pointer"
+            >
+              <Play className="h-4 w-4 fill-blue-400 text-blue-400 group-hover:scale-110 transition-transform" />
+              <span>Watch Motion Showcase</span>
+            </button>
+          )}
+        </div>
+
+        <div className="pt-2 [animation:fadeInUp_0.8s_ease-out_0.5s_both]">
           <a
             href="#deliberation-engine"
-            className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors pt-1 flex items-center gap-1 cursor-pointer"
+            className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors inline-flex items-center gap-1 cursor-pointer"
           >
             <span>or inspect the 5 deterministic safety gates</span>
             <span className="text-neutral-600">↓</span>
